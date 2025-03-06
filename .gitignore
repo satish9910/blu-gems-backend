@@ -1,0 +1,46 @@
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-error.log
+pnpm-debug.log
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.*/logs
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build files
+dist/
+build/
+.cache/
+out/
+.next/
+.vite/
+.vercel/
+.netlify/
+.svelte-kit/
+
+# Editor and OS-specific files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-workspace
+
+# Optional: Docker and deployment
+docker-compose.override.yml
