@@ -1,4 +1,5 @@
 const userModel = require('../models/userModel');
+const Product = require('../models/productModel');
 const bycrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -32,7 +33,7 @@ const userLogin = async (req,res) =>{
         return res.status(400).send('Please provide email and password');
     }
 
-    const user =await userModel.findOne({email}).select('+password');
+    const user = await userModel.findOne({email}).select('+password');
     
     if(!user || !(await bycrypt.compare(password,user.password))){
         return res.status(401).send('Invalid email or password');
@@ -52,5 +53,45 @@ const userLogin = async (req,res) =>{
 
 
 
+// Get All Products
+const getProducts = async (req, res) => {
+    try {
+        const products = await Product.find();
 
-module.exports = {userRegister,userLogin};
+        res.status(200).json({
+            message: 'All products',
+            products,
+        });
+
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+// get lastest products
+
+const getLatestProducts = async (req,res) => {
+    try {
+        const products = await Product.find().sort({_id:-1}).limit(5);
+
+        res.status(200).json({
+            message: 'Latest products',
+            products,
+        });
+
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+
+
+
+
+
+
+
+
+module.exports = {userRegister,userLogin,getProducts,getLatestProducts};
